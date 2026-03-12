@@ -25,7 +25,7 @@ object NETPipeline : Pipeline({
             dotnetTest {
                 id = "netTests"
 
-                projects = "money/money/Money.csproj"
+                projects = "money/Money.csproj"
                 maxRetries = "2"
 
                 sdk = "10"
