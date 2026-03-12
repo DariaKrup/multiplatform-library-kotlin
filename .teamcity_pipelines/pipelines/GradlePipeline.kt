@@ -42,15 +42,15 @@ object GradlePipeline : Pipeline({
     }
 
     job {
-        id = "GradleTestsWrapper"
-        name = "Gradle Tests (custom wrapper)"
+        id = "MavenTests"
+        name = "Maven Tests (unbalanced messages)"
         repositories {
             repository(MavenUnbalancedRoot, enabled = true, checkoutPath = "messages-repo")
         }
         steps {
             maven {
                 name = "Test and deploy"
-                goals = "clean test deploy -DaltDeploymentRepository=local-repo::file://local-repo"
+                goals = "clean test"
                 mavenVersion = defaultProvidedVersion()
 
                 dockerImage = "maven:latest"
