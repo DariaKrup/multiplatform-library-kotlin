@@ -52,12 +52,7 @@ object GradlePipeline : Pipeline({
                 name = "Test and deploy"
                 goals = "clean test"
                 mavenVersion = defaultProvidedVersion()
-
-                dockerImage = "maven:latest"
-                dockerImagePlatform = MavenBuildStep.ImagePlatform.Linux
-                dockerPull = true
-                dockerRunParameters = "-e ENV=test"
-
+                
                 pomLocation = "pom.xml"
                 runnerArgs = "-Dmaven.test.skip=true"
             }
