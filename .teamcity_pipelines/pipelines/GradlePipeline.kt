@@ -12,14 +12,13 @@ import jetbrains.buildServer.configs.kotlin.triggers.vcs
 object GradlePipeline : Pipeline({
     name = "Gradle Pipeline"
 
-    val parameterName = DslContext.getParameter("parameter_name")
     repositories {
         repository(DslContext.settingsRoot)
         repository(MavenUnbalancedRoot, enabledByDefault = false)
     }
 
     params {
-        text("parameter", parameterName)
+        text("parameter", "parameterName")
     }
 
 
