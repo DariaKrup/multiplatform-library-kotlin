@@ -31,6 +31,15 @@ object NETPipeline : Pipeline({
                 sdk = "10"
                 logging = DotnetTestStep.Verbosity.Diagnostic
             }
+            dotnetTest {
+                id = "netTestsSecond"
+
+                projects = "syntax/AssertSyntax.csproj"
+                maxRetries = "3"
+
+                sdk = "10"
+                logging = DotnetTestStep.Verbosity.Diagnostic
+            }
         }
         parallelism = 2
         allowReuse = false

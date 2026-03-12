@@ -52,7 +52,7 @@ object GradlePipeline : Pipeline({
                 name = "Test and deploy"
                 goals = "clean test"
                 mavenVersion = defaultProvidedVersion()
-                
+
                 pomLocation = "pom.xml"
                 runnerArgs = "-Dmaven.test.skip=true"
             }

@@ -35,9 +35,11 @@ project {
     buildType(BuildDeployKotlinLib)
     pipeline(GradlePipeline)
     pipeline(NETPipeline)
+    pipeline(PipelineMultipleRoots)
 
     vcsRoot(MavenUnbalancedRoot)
     vcsRoot(NetVcsRoot)
+    vcsRoot(GradleConnectionRoot)
 
     params {
         param("teamcity.internal.pipelines.creation.enabled", "true")
