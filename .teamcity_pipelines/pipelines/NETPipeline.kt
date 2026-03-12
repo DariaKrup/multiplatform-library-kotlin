@@ -33,6 +33,7 @@ object NETPipeline : Pipeline({
             }
         }
         parallelism = 2
+        allowReuse = false
 
         requirements {
             startsWith("teamcity.agent.jvm.os.name", "Windows")
