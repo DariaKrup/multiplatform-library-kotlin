@@ -1,0 +1,67 @@
+package pipelines
+
+import vcsRoots.MavenUnbalancedRoot
+import jetbrains.buildServer.configs.kotlin.DslContext
+import jetbrains.buildServer.configs.kotlin.buildSteps.MavenBuildStep
+import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
+import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.pipelines.Pipeline
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
+
+
+object GradlePipeline : Pipeline({
+    name = "Gradle Pipeline"
+
+    val parameterName = DslContext.getParameter("parameter_name")
+    repositories {
+        repository(DslContext.settingsRoot)
+        repository(MavenUnbalancedRoot, enabledByDefault = false)
+    }
+
+    params {
+        text("parameter", parameterName)
+    }
+
+
+    triggers {
+        vcs {  }
+    }
+
+    job {
+        id = "GradleErrors"
+        name = "Gradle: GradlePluginConfigurationErrors"
+        repositories {
+            repository(DslContext.settingsRoot)
+        }
+        steps {
+            gradle {
+                id = "gradle_runner"
+                tasks = "clean :convention-plugins:checkKotlinGradlePluginConfigurationErrors"
+                gradleParams = "-x :library:extractDebugAnnotations"
+            }
+        }
+    }
+
+    job {
+        id = "GradleTestsWrapper"
+        name = "Gradle Tests (custom wrapper)"
+        repositories {
+            repository(MavenUnbalancedRoot, enabled = true, checkoutPath = "messages-repo")
+        }
+        steps {
+            maven {
+                name = "Test and deploy"
+                goals = "clean test deploy -DaltDeploymentRepository=local-repo::file://local-repo"
+                mavenVersion = defaultProvidedVersion()
+
+                dockerImage = "maven:latest"
+                dockerImagePlatform = MavenBuildStep.ImagePlatform.Linux
+                dockerPull = true
+                dockerRunParameters = "-e ENV=test"
+
+                pomLocation = "pom.xml"
+                runnerArgs = "-Dmaven.test.skip=true"
+            }
+        }
+    }
+})

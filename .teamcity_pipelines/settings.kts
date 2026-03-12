@@ -3,6 +3,9 @@ import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
+import pipelines.*
+import vcsRoots.*
+
 /*
 The settings script is an entry point for defining a TeamCity
 project hierarchy. The script should contain a single call to the
@@ -30,6 +33,9 @@ version = "2025.11"
 project {
 
     buildType(BuildDeployKotlinLib)
+    pipeline(GradlePipeline)
+
+    vcsRoot(MavenUnbalancedRoot)
 
     params {
         param("teamcity.internal.pipelines.creation.enabled", "true")
