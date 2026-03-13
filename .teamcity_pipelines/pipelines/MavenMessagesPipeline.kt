@@ -75,8 +75,8 @@ object MavenMessagesPipeline : Pipeline ({
         dockerRegistry {
             id = "AzureRegistry"
             url = "https://dkrupkinacontainerregistry.azurecr.io"
-            userName = "17c5afa7-698f-4afd-b518-0db1fb4f0984"
-            password = "credentialsJSON:e705338c-c9c9-42d4-a4bc-be4160bb969c"
+            userName = "dkrupkinacontainerregistry"
+            password = "credentialsJSON:76a85c3b-ca64-43a3-858f-b99cab07100a"
         }
     }
 
