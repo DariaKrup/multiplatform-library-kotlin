@@ -71,7 +71,7 @@ object MavenMessagesPipeline : Pipeline ({
         dockerRegistry {
             id = "DockerRegistry"
             userName = "dariakrup"
-            password = "%docker_io_password%"
+            password = "credentialsJSON:82cbcea7-18a1-4a18-9e08-c383d88d5f4f"
         }
         dockerRegistry {
             id = "AzureRegistry"
