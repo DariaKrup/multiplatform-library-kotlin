@@ -35,12 +35,11 @@ object MavenMessagesPipeline : Pipeline ({
         name = "Maven Job: parallel tests"
         steps {
             maven {
-                name = "Test and deploy"
-                goals = "clean test deploy -DaltDeploymentRepository=local-repo::file://local-repo"
+                name = "Tests"
+                goals = "clean test"
                 mavenVersion = defaultProvidedVersion()
 
                 pomLocation = "pom.xml"
-                runnerArgs = "-Dmaven.test.skip=true"
             }
             script {
                 scriptContent = "echo 'Success'"
