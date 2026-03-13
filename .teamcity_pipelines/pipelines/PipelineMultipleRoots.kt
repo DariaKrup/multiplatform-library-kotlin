@@ -65,4 +65,21 @@ object PipelineMultipleRoots : Pipeline({
             }
         }
     }
+
+    job {
+        id = "fourthVCSRoot"
+        name = "Fourth VCS Root: Maven Demo"
+
+        repositories {
+            repository(JavaDemoRoot)
+        }
+        steps {
+            maven {
+                name = "Maven Tests"
+
+                goals = "clean test"
+                mavenVersion = defaultProvidedVersion()
+            }
+        }
+    }
 })

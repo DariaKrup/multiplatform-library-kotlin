@@ -40,6 +40,7 @@ project {
     vcsRoot(MavenUnbalancedRoot)
     vcsRoot(NetVcsRoot)
     vcsRoot(GradleConnectionRoot)
+    vcsRoot(JavaDemoRoot)
 
     params {
         param("teamcity.internal.pipelines.creation.enabled", "true")
