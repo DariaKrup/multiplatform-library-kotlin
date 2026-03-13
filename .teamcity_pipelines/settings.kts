@@ -36,6 +36,7 @@ project {
     pipeline(GradlePipeline)
     pipeline(NETPipeline)
     pipeline(PipelineMultipleRoots)
+    pipeline(MavenMessagesPipeline)
 
     vcsRoot(MavenUnbalancedRoot)
     vcsRoot(NetVcsRoot)
@@ -44,6 +45,7 @@ project {
 
     params {
         param("teamcity.internal.pipelines.creation.enabled", "true")
+        param("project_parameter", "project level")
     }
 }
 
