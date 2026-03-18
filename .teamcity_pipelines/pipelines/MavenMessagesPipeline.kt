@@ -76,7 +76,7 @@ object MavenMessagesPipeline : Pipeline ({
             id = "AzureRegistry"
             url = "https://dkrupkinacontainerregistry.azurecr.io"
             userName = "dkrupkinacontainerregistry"
-            password = "credentialsJSON:76a85c3b-ca64-43a3-858f-bs"
+            password = ""
         }
     }
 
