@@ -2,6 +2,7 @@ package pipelines
 
 import jetbrains.buildServer.configs.kotlin.buildSteps.*
 import jetbrains.buildServer.configs.kotlin.pipelines.Pipeline
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import vcsRoots.*
 
 object NunitTestsPipeline : Pipeline({
@@ -11,6 +12,10 @@ object NunitTestsPipeline : Pipeline({
 
     repositories {
         repository(NUnitTestsVCSRoot, enabledByDefault = true)
+    }
+
+    triggers {
+        vcs {  }
     }
 
     job {
