@@ -6,6 +6,7 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.MavenBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.pipelines.Pipeline
+import jetbrains.buildServer.configs.kotlin.triggers.schedule
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 
 
@@ -24,6 +25,16 @@ object GradlePipeline : Pipeline({
 
     triggers {
         vcs {  }
+        schedule {
+            schedulingPolicy = daily {
+                hour = 15
+                minute = 5
+                timezone = "Europe/Amsterdam"
+            }
+            triggerBuild = onWatchedBuildChange{
+                buildType = "BuildConfigurationPublish"
+            }
+        }
     }
 
     job {
