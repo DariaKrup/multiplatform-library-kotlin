@@ -1,7 +1,6 @@
 package pipelines
 
-import jetbrains.buildServer.configs.kotlin.buildSteps.DotnetTestStep
-import jetbrains.buildServer.configs.kotlin.buildSteps.dotnetTest
+import jetbrains.buildServer.configs.kotlin.buildSteps.*
 import jetbrains.buildServer.configs.kotlin.pipelines.Pipeline
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import vcsRoots.NetVcsRoot
@@ -22,6 +21,14 @@ object NETPipeline : Pipeline({
         name = ".NET tests"
 
         steps {
+            dotnetRestore {
+                id = "netRestore"
+
+                projects = "./Samples.sln"
+
+                packagesDir = "./Packages"
+                sdk = "10"
+            }
             dotnetTest {
                 id = "netTests"
 
@@ -40,6 +47,27 @@ object NETPipeline : Pipeline({
                 sdk = "10"
                 logging = DotnetTestStep.Verbosity.Diagnostic
             }
+            dotnetBuild {
+                id = "netBuild"
+
+                projects = "./Samples.sln"
+                sdk = "10"
+                versionSuffix = "beta"
+            }
+            dotnetPublish {
+                id = "netPublish"
+
+                projects = "./Samples.sln"
+                sdk = "10"
+                versionSuffix = "beta"
+            }
+            dotnetClean {
+                id = "netClean"
+
+                projects = "./Samples.sln"
+                sdk = "10"
+            }
+
         }
         parallelism = 2
         allowReuse = false

@@ -37,11 +37,15 @@ project {
     pipeline(NETPipeline)
     pipeline(PipelineMultipleRoots)
     pipeline(MavenMessagesPipeline)
+    pipeline(MSBuildPipeline)
+    pipeline(NunitTestsPipeline)
 
     vcsRoot(MavenUnbalancedRoot)
     vcsRoot(NetVcsRoot)
     vcsRoot(GradleConnectionRoot)
     vcsRoot(JavaDemoRoot)
+    vcsRoot(AzureFuncVCSRoot)
+    vcsRoot(NUnitTestsVCSRoot)
 
     params {
         param("teamcity.internal.pipelines.creation.enabled", "true")
